@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tang&#39;s Blog</title>
-    <link>https://ergatea.github.io/</link>
-    <description>Recent content on Tang&#39;s Blog</description>
+    <title>宏观经济 on Tang&#39;s Blog</title>
+    <link>https://ergatea.github.io/categories/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E/</link>
+    <description>Recent content in 宏观经济 on Tang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>&amp;copy; Copyright Xiaoping Tang</copyright>
-    <lastBuildDate>Sat, 09 Jun 2018 12:12:09 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Jun 2018 12:11:44 +0800</lastBuildDate>
     
-	<atom:link href="https://ergatea.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ergatea.github.io/categories/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>CDR基金与独角兽</title>
-      <link>https://ergatea.github.io/posts/cdr%E5%9F%BA%E9%87%91%E4%B8%8E%E7%8B%AC%E8%A7%92%E5%85%BD/</link>
-      <pubDate>Sat, 09 Jun 2018 12:12:09 +0800</pubDate>
-      
-      <guid>https://ergatea.github.io/posts/cdr%E5%9F%BA%E9%87%91%E4%B8%8E%E7%8B%AC%E8%A7%92%E5%85%BD/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>关于去杠杆的深入研究</title>
@@ -55,17 +46,6 @@
       
       <guid>https://ergatea.github.io/posts/%E7%BB%8F%E6%B5%8E%E5%A6%82%E4%BD%95%E5%83%8F%E6%9C%BA%E5%99%A8%E4%B8%80%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%90%86%E8%A7%A3%E7%BB%8F%E6%B5%8E%E8%BF%90%E8%A1%8C%E7%9A%84%E6%A1%86%E6%9E%B6/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>https://ergatea.github.io/about/</link>
-      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://ergatea.github.io/about/</guid>
-      <description>Hugo is a static site engine written in Go.
-It makes use of a variety of open source projects including:
- Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
     </item>
     
   </channel>
