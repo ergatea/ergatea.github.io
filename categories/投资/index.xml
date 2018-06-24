@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>&amp;copy; Copyright Xiaoping Tang</copyright>
-    <lastBuildDate>Fri, 03 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 Nov 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://ergatea.github.io/categories/%E6%8A%95%E8%B5%84/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>彻底理解自由现金流</title>
-      <link>https://ergatea.github.io/posts/%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E8%87%AA%E7%94%B1%E7%8E%B0%E9%87%91%E6%B5%81/</link>
-      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://ergatea.github.io/posts/%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E8%87%AA%E7%94%B1%E7%8E%B0%E9%87%91%E6%B5%81/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>估值是一门艺术：如何为亏损中的成长型公司估值</title>
@@ -28,6 +19,26 @@
       
       <guid>https://ergatea.github.io/posts/%E4%BC%B0%E5%80%BC%E6%98%AF%E4%B8%80%E9%97%A8%E8%89%BA%E6%9C%AF%E5%A6%82%E4%BD%95%E4%B8%BA%E4%BA%8F%E6%8D%9F%E4%B8%AD%E7%9A%84%E6%88%90%E9%95%BF%E5%9E%8B%E5%85%AC%E5%8F%B8%E4%BC%B0%E5%80%BC/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>股息貼現模型</title>
+      <link>https://ergatea.github.io/posts/%E8%82%A1%E6%81%AF%E8%B2%BC%E7%8F%BE%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Thu, 24 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ergatea.github.io/posts/%E8%82%A1%E6%81%AF%E8%B2%BC%E7%8F%BE%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;股息貼現模型&lt;/strong&gt;（英文：&lt;strong&gt;Dividend Discount Model&lt;/strong&gt;，縮寫：&lt;strong&gt;DDM&lt;/strong&gt;），是现金流折现模型的一种特殊形式，仅用于为有限公司|公司的股权资产定价。其用於以投資者角度估算公司股票價格的合理值，原理就是把預期將來派發的一系列股息按利率貼現成現值，一系列股息的淨現值的總和相加即為該股票的&lt;strong&gt;合理價值&lt;/strong&gt;。這條方程又可稱爲&lt;strong&gt;戈登增長模型&lt;/strong&gt;。以學者邁倫·J.戈登命名，因爲學術界傳統認爲戈登在1959年首先提出這模型，但實際上其理論基礎可追溯至1938年由經濟學家約翰·伯爾·威廉姆斯發表的文章《投資價值理論》。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>资产估值</title>
+      <link>https://ergatea.github.io/posts/%E8%B5%84%E4%BA%A7%E4%BC%B0%E5%80%BC/</link>
+      <pubDate>Thu, 24 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ergatea.github.io/posts/%E8%B5%84%E4%BA%A7%E4%BC%B0%E5%80%BC/</guid>
+      <description>&lt;p&gt;资产估值(Asset Valuation )是指评估一项投资组合、一家企业、一项投资或资产负债表项目价值的过程。
+&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -35,7 +35,34 @@
   <link rel='icon' type='image/x-icon' href="https://ergatea.github.io/static/favicon" />
   <script type="text/javascript" src="https://ergatea.github.io/js/bundle.js"></script>
   
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 </head>
 
 <body>
@@ -73,7 +100,9 @@
   <section id="js-article" class="p-article__body">
     <p></p>
 
-<p><a href="https://www.jisilu.cn/question/275922">石诺</a></p>
+<blockquote>
+<p>作者：<a href="https://www.jisilu.cn/question/275922">石诺</a></p>
+</blockquote>
 
 <p>当代任何一个国家的货币都是信用货币，既然是靠信用印刷，那么就必须有实实在在的抵押品——这个抵押品，在绝大多数时候应该是代表一个国家税收能力的国债，或者比我们政府税收更有信用的外汇（如美元），或者，更早的时候是实实在在的黄金白银…… 而黄金白银、外汇和国债的抵押信用依次降低，从各国货币和财富变迁史的角度来看，信用货币印刷只能用以上三种东西作抵押，用国债来印钞已经是最次的一个等级了，如果再降低抵押品等级，那意味着货币信用的不充分。</p>
 
@@ -268,6 +297,8 @@
     
   
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
 

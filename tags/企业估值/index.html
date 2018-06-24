@@ -32,7 +32,34 @@
   <link rel='icon' type='image/x-icon' href="https://ergatea.github.io/static/favicon" />
   <script type="text/javascript" src="https://ergatea.github.io/js/bundle.js"></script>
   
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 </head>
 
 <body>
@@ -54,8 +81,8 @@
     <h2 class="c-title c-article__title"><a href="https://ergatea.github.io/posts/%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E8%87%AA%E7%94%B1%E7%8E%B0%E9%87%91%E6%B5%81/">彻底理解自由现金流</a></h2>
     <p class="c-article__meta">
       Posted on
-      <time datetime="2017-02-03T00:00:00Z">
-        Feb 3, 2017
+      <time datetime="2017-05-03T00:00:00Z">
+        May 3, 2017
       </time>
     </p>
   </header>
@@ -233,6 +260,8 @@
     
   
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
 

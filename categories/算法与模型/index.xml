@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法与模型 on Tang&#39;s Blog</title>
+    <link>https://ergatea.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in 算法与模型 on Tang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>&amp;copy; Copyright Xiaoping Tang</copyright>
+    <lastBuildDate>Thu, 14 Jun 2018 10:47:24 +0800</lastBuildDate>
+    
+	<atom:link href="https://ergatea.github.io/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>带你正确理解 Hurst 指数和分数布朗运动</title>
+      <link>https://ergatea.github.io/posts/%E5%B8%A6%E4%BD%A0%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3-hurst-%E6%8C%87%E6%95%B0%E5%92%8C%E5%88%86%E6%95%B0%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8/</link>
+      <pubDate>Thu, 14 Jun 2018 10:47:24 +0800</pubDate>
+      
+      <guid>https://ergatea.github.io/posts/%E5%B8%A6%E4%BD%A0%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3-hurst-%E6%8C%87%E6%95%B0%E5%92%8C%E5%88%86%E6%95%B0%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

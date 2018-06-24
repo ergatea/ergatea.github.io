@@ -35,7 +35,34 @@
   <link rel='icon' type='image/x-icon' href="https://ergatea.github.io/static/favicon" />
   <script type="text/javascript" src="https://ergatea.github.io/js/bundle.js"></script>
   
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
 
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 </head>
 
 <body>
@@ -270,17 +297,31 @@
       <div class="c-pagination__ctrl">
         <div class="c-pagination__newer">
           
-          <a href="https://ergatea.github.io/posts/%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3%E8%87%AA%E7%94%B1%E7%8E%B0%E9%87%91%E6%B5%81/">Newer</a>
+          <a href="https://ergatea.github.io/posts/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%AF%94%E7%89%B9%E5%B8%81%E4%BA%A4%E6%98%93%E7%9A%84%E8%84%9A%E6%9C%AC/">Newer</a>
           
         </div>
         <div class="c-pagination__older">
           
-          <a href="https://ergatea.github.io/about/">Older</a>
+          <a href="https://ergatea.github.io/posts/%E7%8E%B0%E9%87%91%E6%B5%81%E6%8A%98%E7%8E%B0%E6%A8%A1%E5%9E%8B/">Older</a>
           
         </div>
       </div>
     </nav>
     
+
+<section class="p-related">
+  <h3>See Also</h3>
+  <ul id="slider" class="p-related__list">
+    
+    <li class="p-related__item js-related__item">
+      <a href="/posts/%E8%87%AA%E7%94%B1%E7%8F%BE%E9%87%91%E6%B5%81%E9%87%8F/"
+        >
+        <span>自由現金流量</span>
+      </a>
+    </li>
+    
+  </ul>
+</section>
 
 
     
@@ -415,6 +456,8 @@
     
   
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
 
