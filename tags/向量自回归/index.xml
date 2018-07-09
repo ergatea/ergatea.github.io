@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>向量自回归 on Tang&#39;s Blog</title>
+    <link>https://ergatea.github.io/tags/%E5%90%91%E9%87%8F%E8%87%AA%E5%9B%9E%E5%BD%92/</link>
+    <description>Recent content in 向量自回归 on Tang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>&amp;copy; Copyright Xiaoping Tang</copyright>
+    <lastBuildDate>Sat, 24 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ergatea.github.io/tags/%E5%90%91%E9%87%8F%E8%87%AA%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VAR宏观计量模型演进与发展，无方向确认推断更好</title>
+      <link>https://ergatea.github.io/posts/var%E5%AE%8F%E8%A7%82%E8%AE%A1%E9%87%8F%E6%A8%A1%E5%9E%8B%E6%BC%94%E8%BF%9B%E4%B8%8E%E5%8F%91%E5%B1%95%E6%97%A0%E6%96%B9%E5%90%91%E7%A1%AE%E8%AE%A4%E6%8E%A8%E6%96%AD%E6%9B%B4%E5%A5%BD/</link>
+      <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://ergatea.github.io/posts/var%E5%AE%8F%E8%A7%82%E8%AE%A1%E9%87%8F%E6%A8%A1%E5%9E%8B%E6%BC%94%E8%BF%9B%E4%B8%8E%E5%8F%91%E5%B1%95%E6%97%A0%E6%96%B9%E5%90%91%E7%A1%AE%E8%AE%A4%E6%8E%A8%E6%96%AD%E6%9B%B4%E5%A5%BD/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
