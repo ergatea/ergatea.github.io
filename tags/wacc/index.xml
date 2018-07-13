@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wacc on Tang&#39;s Blog</title>
+    <link>https://ergatea.github.io/tags/wacc/</link>
+    <description>Recent content in Wacc on Tang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>&amp;copy; Copyright Xiaoping Tang</copyright>
+    <lastBuildDate>Thu, 24 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ergatea.github.io/tags/wacc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>加权平均资本成本</title>
+      <link>https://ergatea.github.io/posts/%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E8%B5%84%E6%9C%AC%E6%88%90%E6%9C%AC/</link>
+      <pubDate>Thu, 24 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://ergatea.github.io/posts/%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E8%B5%84%E6%9C%AC%E6%88%90%E6%9C%AC/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
