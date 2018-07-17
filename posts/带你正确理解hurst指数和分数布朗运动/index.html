@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  
+  <title>带你正确理解Hurst指数和分数布朗运动</title>
+  <meta property="og:title" content="带你正确理解Hurst指数和分数布朗运动" />
+  <meta name="twitter:title" content="带你正确理解Hurst指数和分数布朗运动" />
+  
+
+  
+
+  <meta name="author" content="Xiaoping Tang"/>
+  <meta property="og:site_name" content="Tang&#39;s Blog" />
+  <meta property="og:url" content="https://ergatea.github.io/posts/%E5%B8%A6%E4%BD%A0%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3hurst%E6%8C%87%E6%95%B0%E5%92%8C%E5%88%86%E6%95%B0%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8/" />
+
+  
+  <meta name="twitter:card" content="summary" />
+
+  
+  <meta name="twitter:site" content="@ergatea" />
+  <meta name="twitter:creator" content="@ergatea" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:article:author" content="https://facebook.com/xiaoping.tang" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.41" /><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+  <link rel="stylesheet" href="https://ergatea.github.io/css/style.css" />
+  <link rel='icon' type='image/x-icon' href="https://ergatea.github.io/static/favicon" />
+  <script type="text/javascript" src="https://ergatea.github.io/js/bundle.js"></script>
+  
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link p-screen-reader-text">Skip to content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" aria-hidden="true"> <symbol id="icon-500px" viewBox="0 0 16 16"><g> <path d="M3.953 10.512a5.24 5.24 0 0 0 6.996 3.141c.625-.262 1.184-.641 1.666-1.122s.859-1.041 1.122-1.666c.272-.647.412-1.331.412-2.037s-.137-1.394-.412-2.037c-.262-.625-.641-1.184-1.122-1.666s-1.041-.859-1.666-1.122a5.226 5.226 0 0 0-2.037-.413c-.716 0-1.431.144-2.066.413-.509.216-1.372.769-1.875 1.291l-.003.003V.984h7.241c.262-.003.262-.372.262-.491 0-.122 0-.487-.266-.491H4.377a.343.343 0 0 0-.344.341v6.066c0 .197.244.338.472.384.444.094.544-.047.653-.197l.016-.019c.166-.247.681-.766.688-.772a4.262 4.262 0 0 1 3.037-1.25c1.147 0 2.222.444 3.028 1.25a4.245 4.245 0 0 1 1.256 3.019 4.236 4.236 0 0 1-1.25 3.019 4.336 4.336 0 0 1-3.047 1.25 4.136 4.136 0 0 1-2.159-.597l.003-3.688c0-.491.213-1.028.572-1.431a2.09 2.09 0 0 1 1.588-.716c.594 0 1.15.225 1.566.634.409.406.637.95.637 1.528a2.179 2.179 0 0 1-2.206 2.197c-.238 0-.672-.106-.691-.109-.25-.075-.356.272-.391.387-.134.441.069.528.109.541.397.125.659.147 1.003.147a3.173 3.173 0 0 0 3.169-3.169c0-1.734-1.422-3.144-3.166-3.144-.856 0-1.659.328-2.263.919-.575.566-.903 1.319-.903 2.069v.019c-.003.094-.003 2.306-.006 3.031l-.003-.003c-.328-.363-.653-.919-.869-1.488-.084-.222-.275-.184-.534-.103-.125.034-.469.141-.391.394zm3.722-.865c0 .106.097.2.156.253l.019.019c.1.097.194.147.281.147a.181.181 0 0 0 .131-.05c.044-.041.537-.544.588-.591l.553.55c.05.056.106.088.172.088.088 0 .184-.053.284-.156.238-.244.119-.375.063-.438l-.559-.559.584-.588c.128-.137.016-.284-.097-.397-.162-.162-.322-.206-.422-.112l-.581.581-.588-.588a.16.16 0 0 0-.113-.047c-.078 0-.172.053-.275.156-.181.181-.219.306-.125.406l.588.584-.584.584c-.053.05-.078.103-.075.156zm1.278-7.931c-.938 0-1.938.191-2.669.506a.207.207 0 0 0-.134.181.753.753 0 0 0 .069.337c.047.116.166.425.4.334a6.689 6.689 0 0 1 2.334-.444 6.35 6.35 0 0 1 2.469.497c.622.263 1.206.644 1.844 1.194a.22.22 0 0 0 .147.059c.125 0 .244-.122.347-.237.169-.191.287-.35.119-.509a6.858 6.858 0 0 0-2.1-1.356 7.326 7.326 0 0 0-2.825-.563zM14.006 13.3c-.113-.113-.209-.178-.294-.203s-.162-.006-.222.053l-.056.056a6.32 6.32 0 0 1-6.938 1.356 6.336 6.336 0 0 1-2.013-1.356 6.046 6.046 0 0 1-1.356-2.012c-.288-.713-.381-1.247-.413-1.422-.003-.016-.006-.028-.006-.037-.041-.206-.231-.222-.503-.178-.112.019-.459.072-.428.319v.006a7.261 7.261 0 0 0 2.04 3.994 7.266 7.266 0 0 0 10.288 0l.059-.059c.069-.084.134-.225-.159-.516z"/> </g></symbol> <symbol id="icon-codepen" viewBox="0 0 16 16"><g> <path d="M14.777 5.751l-7-4.667a.5.5 0 0 0-.555 0l-7 4.667a.501.501 0 0 0-.223.416v4.667c0 .167.084.323.223.416l7 4.667a.5.5 0 0 0 .554 0l7-4.667a.501.501 0 0 0 .223-.416V6.167a.501.501 0 0 0-.223-.416zM7.5 10.232L4.901 8.5 7.5 6.768 10.099 8.5 7.5 10.232zM8 5.899V2.434l5.599 3.732L11 7.898l-3-2zm-1 0l-3 2-2.599-1.732L7 2.435V5.9zM3.099 8.5L1 9.899V7.101L3.099 8.5zM4 9.101l3 2v3.465l-5.599-3.732L4 9.102zm4 2l3-2 2.599 1.732L8 14.565V11.1zM11.901 8.5L14 7.101v2.798L11.901 8.5z"/> </g></symbol> <symbol id="icon-dribbble" viewBox="0 0 16 16"><g> <path d="M8 16c-4.412 0-8-3.588-8-8s3.587-8 8-8c4.412 0 8 3.587 8 8s-3.588 8-8 8zm6.747-6.906c-.234-.075-2.116-.634-4.256-.291a29.7 29.7 0 0 1 1.328 4.872 6.845 6.845 0 0 0 2.928-4.581zM10.669 14.3c-.103-.6-.497-2.688-1.456-5.181-.016.006-.031.009-.044.016-3.856 1.344-5.241 4.016-5.362 4.266a6.807 6.807 0 0 0 6.863.9zm-7.747-1.722c.156-.266 2.031-3.369 5.553-4.509a7.04 7.04 0 0 1 .269-.081 24.04 24.04 0 0 0-.553-1.159c-3.409 1.022-6.722.978-7.022.975-.003.069-.003.138-.003.209 0 1.753.666 3.356 1.756 4.566zM1.313 6.609c.306.003 3.122.016 6.319-.831a43.092 43.092 0 0 0-2.534-3.953 6.854 6.854 0 0 0-3.784 4.784zM6.4 1.366a36.612 36.612 0 0 1 2.55 4c2.431-.909 3.459-2.294 3.581-2.469A6.799 6.799 0 0 0 6.4 1.366zm6.891 2.325c-.144.194-1.291 1.663-3.816 2.694.159.325.313.656.453.991.05.119.1.234.147.353 2.275-.284 4.534.172 4.759.219a6.816 6.816 0 0 0-1.544-4.256z"/> </g></symbol> <symbol id="icon-facebook" viewBox="0 0 16 16"><g> <path d="M9.5 3H12V0H9.5C7.57 0 6 1.57 6 3.5V5H4v3h2v8h3V8h2.5l.5-3H9V3.5c0-.271.229-.5.5-.5z"/> </g></symbol> <symbol id="icon-feed" viewBox="0 0 16 16"><g> <path d="M2.13 11.733c-1.175 0-2.13.958-2.13 2.126 0 1.174.955 2.122 2.13 2.122a2.126 2.126 0 0 0 2.133-2.122 2.133 2.133 0 0 0-2.133-2.126zM.002 5.436v3.067c1.997 0 3.874.781 5.288 2.196a7.45 7.45 0 0 1 2.192 5.302h3.08c0-5.825-4.739-10.564-10.56-10.564zM.006 0v3.068C7.128 3.068 12.924 8.87 12.924 16H16C16 7.18 8.824 0 .006 0z"/> </g></symbol> <symbol id="icon-flickr" viewBox="0 0 16 16"><g> <path d="M0 8.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0zm9 0a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/> </g></symbol> <symbol id="icon-github" viewBox="0 0 16 16"><g> <path d="M8 .198a8 8 0 0 0-2.529 15.591c.4.074.547-.174.547-.385 0-.191-.008-.821-.011-1.489-2.226.484-2.695-.944-2.695-.944-.364-.925-.888-1.171-.888-1.171-.726-.497.055-.486.055-.486.803.056 1.226.824 1.226.824.714 1.223 1.872.869 2.328.665.072-.517.279-.87.508-1.07-1.777-.202-3.645-.888-3.645-3.954 0-.873.313-1.587.824-2.147-.083-.202-.357-1.015.077-2.117 0 0 .672-.215 2.201.82A7.672 7.672 0 0 1 8 4.066c.68.003 1.365.092 2.004.269 1.527-1.035 2.198-.82 2.198-.82.435 1.102.162 1.916.079 2.117.513.56.823 1.274.823 2.147 0 3.073-1.872 3.749-3.653 3.947.287.248.543.735.543 1.481 0 1.07-.009 1.932-.009 2.195 0 .213.144.462.55.384A8 8 0 0 0 8.001.196z"/> </g></symbol> <symbol id="icon-gitlab" viewBox="0 0 28 28"><g> <path d="M1.625 11.031L14 26.89.437 17.046a1.092 1.092 0 0 1-.391-1.203l1.578-4.813zm7.219 0h10.313L14.001 26.89zM5.75 1.469l3.094 9.562H1.625l3.094-9.562a.548.548 0 0 1 1.031 0zm20.625 9.562l1.578 4.813a1.09 1.09 0 0 1-.391 1.203l-13.563 9.844 12.375-15.859zm0 0h-7.219l3.094-9.562a.548.548 0 0 1 1.031 0z"/> </g></symbol> <symbol id="icon-google-plus" viewBox="0 0 16 16"><g> <path d="M5.091 7.147v1.747h2.888c-.116.75-.872 2.197-2.888 2.197-1.737 0-3.156-1.441-3.156-3.216s1.419-3.216 3.156-3.216c.991 0 1.65.422 2.028.784L8.5 4.112c-.888-.828-2.037-1.331-3.409-1.331C2.275 2.784 0 5.059 0 7.875s2.275 5.091 5.091 5.091c2.937 0 4.888-2.066 4.888-4.975 0-.334-.037-.591-.081-.844H5.092zM16 7h-1.5V5.5H13V7h-1.5v1.5H13V10h1.5V8.5H16z"/> </g></symbol> <symbol id="icon-instagram" viewBox="0 0 22 22"><g> <path d="M15.445 0H6.554A6.559 6.559 0 0 0 0 6.554v8.891A6.559 6.559 0 0 0 6.554 22h8.891a6.56 6.56 0 0 0 6.554-6.555V6.554A6.557 6.557 0 0 0 15.445 0zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342H6.554a4.341 4.341 0 0 1-4.341-4.342V6.554a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"/> <path d="M11 5.312A5.693 5.693 0 0 0 5.312 11 5.694 5.694 0 0 0 11 16.688 5.694 5.694 0 0 0 16.688 11 5.693 5.693 0 0 0 11 5.312zm0 9.163a3.475 3.475 0 1 1-.001-6.95 3.475 3.475 0 0 1 .001 6.95zm5.7-10.484a1.363 1.363 0 1 1-1.364 1.364c0-.752.51-1.364 1.364-1.364z"/> </g></symbol> <symbol id="icon-linkedin" viewBox="0 0 16 16"><g> <path d="M6 6h2.767v1.418h.04C9.192 6.727 10.134 6 11.539 6 14.46 6 15 7.818 15 10.183V15h-2.885v-4.27c0-1.018-.021-2.329-1.5-2.329-1.502 0-1.732 1.109-1.732 2.255V15H6V6zM1 6h3v9H1V6zM4 3.5a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 4 3.5z"/> </g></symbol> <symbol id="icon-mail" viewBox="0 0 22 18"><g> <path fill="#000" d="M0 17.225V.776h22v16.447H0v.002zm3.011-1.815h15.978l-5.111-5.115L11 13.179l-2.877-2.883-5.112 5.114zm-1.216-1.275l5.077-5.09L1.795 3.98v10.155zm13.332-5.09l5.079 5.09V3.979l-5.079 5.066zm-4.126 1.588l8.022-8.027-16.045-.001 8.023 8.028z"/> </g></symbol> <symbol id="icon-npm" viewBox="0 0 16 16"><g> <path d="M0 0v16h16V0H0zm13 13h-2V5H8v8H3V3h10v10z"/> </g></symbol> <symbol id="icon-pinterest" viewBox="0 0 16 16"><g> <path d="M8 1.069a6.93 6.93 0 0 0-2.525 13.384c-.059-.547-.116-1.391.025-1.988.125-.541.813-3.444.813-3.444s-.206-.416-.206-1.028c0-.963.559-1.684 1.253-1.684.591 0 .878.444.878.975 0 .594-.378 1.484-.575 2.306-.166.691.344 1.253 1.025 1.253 1.231 0 2.178-1.3 2.178-3.175 0-1.659-1.194-2.819-2.894-2.819-1.972 0-3.128 1.478-3.128 3.009 0 .597.228 1.234.516 1.581.056.069.066.128.047.2a95.89 95.89 0 0 1-.194.787c-.031.128-.1.153-.231.094-.866-.403-1.406-1.669-1.406-2.684 0-2.188 1.587-4.194 4.578-4.194 2.403 0 4.272 1.712 4.272 4.003 0 2.388-1.506 4.313-3.597 4.313-.703 0-1.362-.366-1.588-.797 0 0-.347 1.322-.431 1.647-.156.603-.578 1.356-.862 1.816a6.93 6.93 0 0 0 8.984-6.622 6.931 6.931 0 0 0-6.931-6.934z"/> </g></symbol> <symbol id="icon-search" viewBox="0 0 16 16"><g> <path d="M15.504 13.616l-3.79-3.223c-.392-.353-.811-.514-1.149-.499a6 6 0 1 0-.672.672c-.016.338.146.757.499 1.149l3.223 3.79c.552.613 1.453.665 2.003.115s.498-1.452-.115-2.003zM6 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/> </g></symbol> <symbol id="icon-tumblr" viewBox="0 0 16 16"><g> <path d="M9.001 7v3.659c0 .928-.012 1.463.086 1.727.098.262.342.534.609.691.354.212.758.318 1.214.318.81 0 1.289-.107 2.09-.633v2.405a9.089 9.089 0 0 1-1.833.639A7.93 7.93 0 0 1 9.369 16a4.9 4.9 0 0 1-1.725-.276 4.195 4.195 0 0 1-1.438-.79c-.398-.343-.672-.706-.826-1.091s-.23-.944-.23-1.676V6.556H3.003V4.29c.628-.204 1.331-.497 1.778-.877a4.386 4.386 0 0 0 1.08-1.374C6.133 1.505 6.32.825 6.422 0h2.579v4H13v3H9.001z"/> </g></symbol> <symbol id="icon-twitter" viewBox="0 0 16 16"><g> <path d="M16 3.538a6.461 6.461 0 0 1-1.884.516 3.301 3.301 0 0 0 1.444-1.816 6.607 6.607 0 0 1-2.084.797 3.28 3.28 0 0 0-2.397-1.034 3.28 3.28 0 0 0-3.197 4.028 9.321 9.321 0 0 1-6.766-3.431 3.284 3.284 0 0 0 1.015 4.381A3.301 3.301 0 0 1 .643 6.57v.041A3.283 3.283 0 0 0 3.277 9.83a3.291 3.291 0 0 1-1.485.057 3.293 3.293 0 0 0 3.066 2.281 6.586 6.586 0 0 1-4.862 1.359 9.286 9.286 0 0 0 5.034 1.475c6.037 0 9.341-5.003 9.341-9.341 0-.144-.003-.284-.009-.425a6.59 6.59 0 0 0 1.637-1.697z"/> </g></symbol> <symbol id="icon-vimeo" viewBox="0 0 16 16"><g> <path d="M15.994 4.281c-.072 1.556-1.159 3.691-3.263 6.397-2.175 2.825-4.016 4.241-5.522 4.241-.931 0-1.722-.859-2.366-2.581-.431-1.578-.859-3.156-1.291-4.734-.478-1.722-.991-2.581-1.541-2.581-.119 0-.538.253-1.256.753l-.753-.969c.791-.694 1.569-1.388 2.334-2.081 1.053-.909 1.844-1.387 2.372-1.438 1.244-.119 2.013.731 2.3 2.553.309 1.966.525 3.188.647 3.666.359 1.631.753 2.447 1.184 2.447.334 0 .838-.528 1.509-1.588.669-1.056 1.028-1.862 1.078-2.416.097-.912-.262-1.372-1.078-1.372a2.98 2.98 0 0 0-1.184.263c.787-2.575 2.287-3.825 4.506-3.753 1.641.044 2.416 1.109 2.322 3.194z"/> </g></symbol> <symbol id="icon-wordpress" viewBox="0 0 16 16"><g> <path d="M2 8c0 2.313 1.38 4.312 3.382 5.259L2.52 5.622A5.693 5.693 0 0 0 2 8zm10.05-.295c0-.722-.266-1.222-.495-1.612-.304-.482-.589-.889-.589-1.371 0-.537.418-1.037 1.008-1.037.027 0 .052.003.078.005A6.064 6.064 0 0 0 8 2.156 6.036 6.036 0 0 0 2.987 4.79c.141.004.274.007.386.007.627 0 1.599-.074 1.599-.074.323-.018.361.444.038.482 0 0-.325.037-.687.055l2.185 6.33 1.313-3.835-.935-2.495a12.304 12.304 0 0 1-.629-.055c-.323-.019-.285-.5.038-.482 0 0 .991.074 1.58.074.627 0 1.599-.074 1.599-.074.323-.018.362.444.038.482 0 0-.326.037-.687.055l2.168 6.282.599-1.947c.259-.809.457-1.389.457-1.889zm-3.945.806l-1.8 5.095a6.148 6.148 0 0 0 3.687-.093.52.52 0 0 1-.043-.081L8.105 8.511zm5.16-3.315c.026.186.04.386.04.601 0 .593-.114 1.259-.456 2.093l-1.833 5.16c1.784-1.013 2.983-2.895 2.983-5.051a5.697 5.697 0 0 0-.735-2.803zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14z"/> </g></symbol> <symbol id="icon-youtube" viewBox="0 0 16 16"><g> <path d="M15.841 4.8s-.156-1.103-.637-1.587c-.609-.637-1.291-.641-1.603-.678-2.237-.163-5.597-.163-5.597-.163h-.006s-3.359 0-5.597.163c-.313.038-.994.041-1.603.678C.317 3.697.164 4.8.164 4.8S.005 6.094.005 7.391v1.213c0 1.294.159 2.591.159 2.591s.156 1.103.634 1.588c.609.637 1.409.616 1.766.684 1.281.122 5.441.159 5.441.159s3.363-.006 5.6-.166c.313-.037.994-.041 1.603-.678.481-.484.637-1.588.637-1.588s.159-1.294.159-2.591V7.39c-.003-1.294-.162-2.591-.162-2.591zm-9.494 5.275V5.578l4.322 2.256-4.322 2.241z"/> </g></symbol></svg>
+  <header class="l-header">
+    
+    <p class="c-title p-title"><a href="https://ergatea.github.io/" class="p-title__link">Tang&#39;s Blog</a></p>
+    
+    
+  </header>
+  <main id="main" class="l-main">
+
+
+<article class="p-article">
+  <header>
+    <h1>带你正确理解Hurst指数和分数布朗运动</h1>
+    <div>
+      <div class="c-time">
+        Posted on
+        <time datetime="2018-06-14T10:47:24&#43;08:00">
+          Jun 14, 2018
+        </time>
+      </div>
+      
+      <a href="https://ergatea.github.io/tags/hurst" class="c-tag">Hurst</a>
+      
+      <a href="https://ergatea.github.io/tags/%E6%A8%A1%E5%9E%8B" class="c-tag">模型</a>
+      
+    </div>
+  </header>
+  
+  <section id="js-article" class="p-article__body">
+    <p></p>
+
+<p>作者：石川</p>
+
+<h2 id="引言">引言</h2>
+
+<p><strong>赫斯特指数和分数布朗运动大概是在国内量化投资界被使用（和被滥用）的最广泛的分析手段。</strong>它们被提出的历史进程如下。</p>
+
+<p>1951 年，英国水文学家赫斯特（Harold Edwin Hurst）在研究尼罗河水位变化时发现了时间序列中存在的<strong>长记忆性</strong>（long-term memory, Hurst 1951），即<strong>时间序列当前（或过去）的取值以远超随机扰动所能达到的程度影响这该时间序列在未来的取值</strong>。进一步的，他发现该长记忆性存在于更广泛的自然现象中，比如降雨量、树的年轮，太阳耀斑等。为了纪念他的发现，后人使用<strong>赫斯特指数（Hurst exponent，记为 H）来刻画一个时间序列的长记忆性</strong>。</p>
+
+<p>1968 年，Mandelbrot and Van Ness (1968) 提出<strong>分数布朗运动（Fractional Brownian Motions，FBM）</strong>。对于呈现出长记忆性的时间序列，该数学模型结合 Hurst 指数形成了一个完善且自洽的研究体系，使人们可以研究长记忆性如何影响时间序列的变化。后续的研究表明，FBM 完美的适用于自然科学、工程、以及统计学中的许多问题。<strong>FBM 的核心性质是该过程在任意时间窗口内增量的稳定性、自相似性和自相关性</strong>。</p>
+
+<p>1994 年，Peters 将 Hurst 指数和分数布朗运动应用于资本市场（Peters 1994），指出<strong>股票的（对数）价格序列服从分数布朗运动</strong>，并提出了著名<strong>的分形市场假说（Fractal Market Hypothesis）</strong>。这无疑是即有效市场假说之后，人们对资本市场价格变化的一种全新认知。</p>
+
+<p>毫无疑问，Hurst 指数和 FBM 对于人们今天研究股票的价格和收益率至关重要。然而，<strong>FBM 被提出的根本目的是科学家在寻找一个更适当的模型来描述自然界中一些时间序列的变化</strong>。</p>
+
+<p>Hurst、Mandelbrot 以及 Van Ness大概不会想到在 FBM 被提出半个世纪后，<strong>遥远的东方有一群人在没有真正理解 FBM 和 Hurst 指数本质的前提下，过度解读、使用 FBM 增量的自相关性来构建量化投资策略</strong>。在这方面，不严谨逻辑推演如下</p>
+
+<blockquote>
+<p>FBM 描述投资品价格（更严谨的，描述对数价格），因此它的增量就是对数收益率。如果 Hurst 指数 &gt; 0.5，说明前后收益率之间有正相关，因此之前涨了之后还会涨，之前跌了之后还会跌，而这就是趋势。</p>
+</blockquote>
+
+<p>这个推演不严谨（甚至是错误）是因为：</p>
+
+<ol>
+<li>它从本质上错误的定义了“趋势”；</li>
+<li>它过分夸大了 FBM 增量之间的正相关性在构建投资策略时的作用；</li>
+<li>Hurst 指数描述的记忆性仅对线性过程有效；对于复杂非线性过程，其记忆性需要除 Hurst 指数之外的其他的参数来描述（Kamenshchikov 2014）。而投资品价格和收益率变化是非线性过程。</li>
+</ol>
+
+<p>显然，前两点原因是最重要的，我们在本文第五节谈到 Hurst 指数和 FBM 对投资实践的意义时会着重论述。</p>
+
+<p><strong>本文的目的就是拨开云雾、去伪存真，为读者揭示 Hurst 指数和 FBM 的真正内涵</strong>。相信看完本文，你会理解长记忆性到底意味着什么，以及 FBM 增量间的相关性对于构建投资策略到底有多大用处。我们也会明白为什么投资品的收益率会呈现出波动率聚类以及尖峰肥尾的分布。</p>
+
+<p>本文假设读者已经熟悉标准布朗运动的概念和基本性质。需要回顾一下的小伙伴可以参考我们之前的文章《布朗运动、伊藤引理、BS 公式（前篇）》。</p>
+
+<h2 id="长记忆性和-hurst-指数">长记忆性和 Hurst 指数</h2>
+
+<p><strong>对于一个时间序列，它在一段时间内的变化范围（或波动）如何随时间跨度大小而变化往往可以揭示该时间序列的特性</strong>。</p>
+
+<p>让我们从最简单的讲起。</p>
+
+<p>假设我们有一组相互独立，均值为 0 方差为 1 的随机变量按时间依次出现。它们够了一个时间序列。这个时间序列在某段时间跨度 T 内的变化范围和 T 的 <sup>1</sup>&frasl;<sub>2</sub> 次方呈线性关系。我们熟悉的标准布朗运动的增量就满足这个性质（增量之间是相互独立的）。</p>
+
+<p>然而 Hurst 发现，对于自然界中的很多时间序列，它们在时间跨度 T 内的变化范围并不是和 T 的 <sup>1</sup>&frasl;<sub>2</sub> 次方成正比，而是和比 <sup>1</sup>&frasl;<sub>2</sub> 更高的次方成正比，这表明时间序列的取值之间不是独立的，而是相互影响，即时间序列的自相关系数不为 0。我们说这样的时间序列是有长记忆的。根据 Beran (1994)，<strong>一个具有长记忆性的平稳时间序列</strong>（比如河流水位的变化或者投资品收益率）定义如下：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURSNmd4RzI3dENWVWFUYlJsbWlVWS1LOHcxVElBQkVSMUdGRWtVNWpZa0VBQkFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTIyMX0/5955b2d2b04500b448/photo.jpg" alt="" /></p>
+
+<p>长记忆性是和短期相关性（short-term dependency）相对应的。一个具有短期相关性的时间序列它的自相关系数随着间隔（lag）的增大很快衰减为 0 或者按指数衰减；而对于具有长记忆性的时间序列，它的自相关系数衰减的更慢。<strong>这个定义说明，如果一个平稳时间序列的自相关函数 ρ(k) 的衰减速度服从幂律衰减（即比指数衰减慢），那么这个时间序列就具备长记忆性。记忆性体现在自相关函数的非独立性上，而“长”体现在衰减的慢</strong>。</p>
+
+<p>Hurst 指数 H 就用来刻画这种长记忆性；它被用来测量一个时间序列的波动范围如何随时间跨度变化，即：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURTS2d4RzI3dENWWDFWc0I2VEVzMm56aEwxVElBQks4eTFwOVZDUjg3UmpnQkFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTI4NX0/aeb21676409b50dc0b/photo.jpg" alt="" /></p>
+
+<p>其中，n 是时间序列观测点的个数，代表时间跨度大小；R(n) 是这 n 个观测点的变化范围；S(n) 是这些点的标准差。使用 S(n) 对 R(n) 进行标准化，得到 R(n)/S(n)，它是以标准差重新标度过的范围，称为<strong>重标极差（rescaled range）</strong>；A 是常数；H 就是Hurst 指数。</p>
+
+<p>H 的取值范围在 0 和 1 之间（不包括 0 和 1）。当 H = <sup>1</sup>&frasl;<sub>2</sub> 时，该时间序列没有相关性。当 H &gt; <sup>1</sup>&frasl;<sub>2</sub> 时，该时间序列有长记忆性；当 H &lt; <sup>1</sup>&frasl;<sub>2</sub> 时，该时间序列表现出反持续性，因此它表现出比纯随机更强的波动。</p>
+
+<p>虽然有了 Hurst 指数，但我们仍然没有分析这类时间序列的模型。分数布朗运动应运而生。</p>
+
+<h2 id="分数布朗运动">分数布朗运动</h2>
+
+<p>分数布朗运动 FBM（又称为分形布朗运动）脱胎于标准布朗运动。FBM 是一个定义在时域上的连续随机过程 B_H(t)，它满足：</p>
+
+<ol>
+<li>对于任何 t 和 Δt &gt; 0，B_H(t+Δt) – B_H(t) 的期望为 0，即 FBM 的增量的期望为 0。</li>
+<li>对于不同时刻 t 和 s，它们的协方差函数为：
+<img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURTYWd4RzI3dENWVzdwZ0FCWG50NGlQdE1VTlV5QUFULUd6bzhJQnpMQTNFM0FRQUJBZyIsIm0iOiJpbWFnZVwvanBlZyIsIm4iOiJwaG90by5qcGciLCJkIjoxNTI4OTQ1NDcyfQ/bca157d5eb8eeedfe7/photo.jpg" alt="" /></li>
+</ol>
+
+<p>其中 H 就是描述这个 FBM 增量间关系的 Hurst 指数。FBM 的核心性质是其增量的平稳性、自相似性和自相关性（H = 0.5 除外；当 H = 0.5 时，FBM 变化为标准布朗运动）。</p>
+
+<p>首先来看自相似性（self-affinity property）。它指的是对于两个成比例的时间跨度，记为 τ 和 kτ（k 是比例缩放系数），FBM 在这两段时间跨度上的增量依照 k^H 的缩放比例满足统计上的同分布，即：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURTcWd4RzI3dENWWDV5a2RGTUZmdUx2LTcweklBQkdBbDBCNnE4R0tXUXZNREFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTU1Mn0/f411e27d9e3de04800/photo.jpg" alt="" /></p>
+
+<p>如果我们使用 FBM 来描述投资品（对数）价格，则这个性质说明不论我们看 5 分钟线、30 分钟线、日线、或者周线，投资品价格在不同时间尺度上的变化（即不同频率上的收益率）按照 Hurst 指数刻画的缩放比例 k^H 呈现出统计上的同分布。即如果我们把投资品价格的 5 分钟收益率按照 6^H 比例放大后和 30 分钟收益率比较，我们是无法区分它们的，因为他们在统计上满足相同的分布。</p>
+
+<p>再来看增量的自相关性（这是被国内量化投资界过度错误使用的性质）具有如下性质：</p>
+
+<blockquote>
+<p>如果 H &gt; 0.5，则 FBM 的增量之间正相关；</p>
+
+<p>如果 H &lt; 0.5，则 FBM 的增量之间负相关。</p>
+</blockquote>
+
+<p>Mandelbrot and Van Ness (1968) 对增量之间的相关性进行了定量的计算。令 [-t/2 – t2, -t/2] 和 [t/2, t/2 + t1] 代表两个不重合的时间跨度（因此这两个跨度的长度分别为 t1 和 t2），则 FBM 在这两个跨度上的增量之间的相关系数为（记为 C(t,t1,t2)）：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURTNmd4RzI3dENWVlJvdzhtMGhCbWRvQTAxVElBQktYRjN6R2U2bWMtOFVFQkFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTY3Nn0/aaad5e6a71e96b46a0/photo.jpg" alt="" /></p>
+
+<p><strong>可以证明，无论 t，t1 以及 t2 的取值，当 H &gt; 0.5 时，该相关系数都大于 0；当 H &lt; 0.5 时，该相关系数都小于 0</strong>。</p>
+
+<p>我们在上式的基础上做一些有用的推导。令 t1 = t2，即我们考虑 FBM 在两个相同跨度上增量的自相关性。另外，令 t = s × t1，s = 0，1，2，…，即这两段增量之间的间隔是它们跨度的 s 倍。如此处理后再计算这两段增量的相关性，实际上是在计算原始 FBM 按照 1/t1 频率进行一阶差分后的序列的自相关性，其间隔就是 s。</p>
+
+<p>经过简单的代数运算很容易得到：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURUS2d4RzI3dENWVUVzYTZVbk1YY1cyQXUxVElBQkRGSTJiTmF2MTVsZjBFQkFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTc0OH0/1435c6ec3dadb9b116/photo.jpg" alt="" /></p>
+
+<p><strong>可见，这个 FBM 一阶差分序列的自相关性仅和间隔 s（以及 Hurst 指数 H）有关，而与计算自相关性的时间点无关</strong>。这就证明了 FBM 增量的平稳性。特别的，如果我们取 s = 0，则我们关注的是两个相邻的 t1 长度内 FBM 增量的自相关性，它等于：</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURUYWd4RzI3dENWVWpmNlh2dGttUVJKVzIweklBQlB0Zmk5SzlBeVZ5dGZRREFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTgzM30/cba98d05275bfbfccd/photo.jpg" alt="" /></p>
+
+<p>无论 s 是否为 0，以上两式均与时间跨度的取值无关。<strong>这是非常重要的一个性质，说明 FBM 增量的自相关性和求解增量的时间跨度 t1（或差分 FBM 的频率）无关，仅由 s 和 H 刻画。因此 Hurst 指数描述的是 FBM 增量的自相关性在不同频率上的共性</strong>。在下一节介绍重标极差法计算 Hurst 指数时，我们会进一步解释这一点。</p>
+
+<h2 id="重标极差法">重标极差法</h2>
+
+<p>Hurst 指数刻画的是不同频率下 FBM 增量的波动和频率的关系。波动的含义是 FBM 在不同频率下的增量的分布宽度。刻画这个宽度可以使用重标极差或者别的指标，比如标准差。这就构成了计算 Hurst 指数的不同方法。</p>
+
+<p>当使用重标极差来描述波动的分布宽度时，该方法便称为重标极差分析（rescaled range analysis，记为 R/S 分析），这是由 Hurst 发明（Hurst 1951），也是业界最普遍的一种方法。在国内很多投资研究报告中计算 Hurst 指数时，采用的正是这种方法。</p>
+
+<p>理解这个方法对完全搞懂 Hurst 指数和 FBM 至关重要。比如，FBM 研究的是投资品价格序列，但是为什么我们却说收益率的 Hurst 指数，而不说价格序列的 Hurst 指数？又比如，我们可以使用日收益率计算 Hurst 指数，也可以使用周收益率计算 Hurst 指数，它们之间到底有什么区别和联系？以回答这些问题为目标，本节参考 Peters (1994) 的步骤介绍如何使用重标极差法计算 Hurst 指数。</p>
+
+<p>首先必须明确的是，在金融市场投资领域，FBM 是用来对投资品的对数价格建模的，因此 FBM 的增量就是投资品的对数收益率。使用对数价格的目的是将价格标准化，使时间序列在不同绝对价格下的波动具有可比性。举个例子，如果不进行标准化，那么显然 100 点的波动对于 3000 点和 6000 点的上证指数是不一样的，是不可比的。</p>
+
+<p>根据 FBM 的性质，其增量满足平稳性。因此，投资品的对数收益率满足平稳性。而长记忆性，即 Hurst 指数，是刻画平稳时间序列自相关性的一个指标（Beran 1994）。因此 Hurst 指数刻画的就是对数收益率的自相关性。这就是为什么当我们说 Hurst 指数时，它的对象是收益率序列而非价格序列。</p>
+
+<p>R/S 分析的步骤如下。</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURUcWd4RzI3dENWVnllM2R1U2lLOFc1ODAxVElBQkxYUHVIeDhkdkJ3ZWtNQkFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NTkyN30/b1e9d0481a226e0081/photo.jpg" alt="" /></p>
+
+<p>这里的关键点是累积离差是相对于该子集均值而言的，即这里有个去均值的过程，因此下一步计算出的波动范围（range）也是去均值化后的。在 Hurst 的研究中，他使用的正是去均值化后的离差和波动范围，这可以消除序列长期趋势对增量之间相关性的影响（Hurst 1951，Feller 1951）。由于对数收益率序列的累加构成对数价格，而对数价格由 FBM 描述，因此去均值也保证了收益率序列满足 B_H(t) 在任意长度区间内增量的期望为 0。如果没有进行去均值处理，则对数收益率序列可能存在非零的漂移率（drift rate）常数项，这会造成 FBM 不满足增量零均值性质。</p>
+
+<blockquote>
+<p>Hurst 指数刻画的是去除漂移率项之后的对数收益率的自相关性。</p>
+</blockquote>
+
+<p>考虑下面的例子。假设对数收益率序列为：2%，-1%，2%，-1%，2%，-1%，2%，-1%。它们的均值为 0.5%，因此去均值化后的序列为：1.5%，-1.5%，1.5%，-1.5%，1.5%，-1.5%，1.5%，-1.5%。显然，这两个序列的累积离差序列完全不同（因此在下一步中计算出的波动范围也不同）。</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURUNmd4RzI3dENWVU5RU0J0aGhYeEhxNHcxVElBQk5HZ3oxTWJXUUFCU3pWREFRQUJBZyIsIm0iOiJpbWFnZVwvanBlZyIsIm4iOiJwaG90by5qcGciLCJkIjoxNTI4OTQ1OTgyfQ/4d249fd4f454f68e4a/photo.jpg" alt="" /></p>
+
+<p>Log((R/S)_n) 和 log(n) 之间的线性关系（斜率）就是 Hurst 指数 H。我们来看看这条跨越不同 log(n)——对应的是计算收益率的不同频率——的直线到底意味着什么。</p>
+
+<p>在求解 Hurst 指数 H 的过程中，随着时间跨度 n 的增加，我们逐步考察更低频率的对数收益率的累积变化。<strong>原始价格数据的粒度决定了我们在分析中涉及的最高频率（因为 n 的取值最小为 1），而 Hurst 指数描述的是以这个最高频率为上界的全频率*范围内的收益率序列的相关性</strong>。</p>
+
+<ul>
+<li>说全频率不太确切。大量国内外实证指出，当时间跨度 logn 太大之后，Hurst 指数 H 刻画的记忆性开始失效，即如果我们把 log((R/S)_n) 和 logn 画出散点图，那么当 logn 大于某个值，即频率小于某个值的时候，log((R/S)_n) 和 logn 的线性关系开始失效（比如下图来自使用 R/S 法分析上证指数从 2005 年起日收益率的 Hurst 指数，log((R/S)_n) 和 logn 的线性关系当 n 大于 244 个交易日——约 1 年——后失效）。<strong>因此，Hurst 指数刻画的是从分析的最高频率到线性关系失效对应的最低频率之间所有频率的相关性。在这段频率区间内，无论我们看哪个频率的收益率，其自相关性都由一个共同的 H 刻画</strong>。</li>
+</ul>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURVS2d4RzI3dENWVmtXeE03S2RLZkJ3YXQweklBQlB6N0s4XzRKZzZvZHUwREFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NjA0Nn0/6d4e138d22fe689a01/photo.jpg" alt="" /></p>
+
+<p>来看几个例子。假设我们输入的数据为 5 分钟收益率（即采样频率是 5 分钟），而 log(R/S) 和 logn 的散点图说明当 n = 250 个交易日线性关系时失效（相当于 1 年），这意味着我们考虑的频率范围是从 5 分钟收益率一直到 1 年的收益率。假设 H = 0.6，这意味着在这个频率范围内，无论我们考察 5 分钟收益率的自相关性，还是日收益率的自相关性，还是周收益率的自相关性，亦或是年收益率的自相关性，它们都由 H = 0.6 来刻画。</p>
+
+<p>而当我们将输入数据的频率提高到 1 分钟收益率数据会怎么样呢？我们的分析范围由之前的 5 分钟到 1 年扩大到 1 分钟到 1 年。因此，在这种情况下计算出来的H数值则刻画这个更大频率范围内收益率的自相似性。显然，它涵盖了之前的 5 分钟到 1 年这个频率区间。那是否意味着这个新的H数值等于之前的 0.6 呢？答案是否定的。由于新的分析中用到了更高频的数据（1 分钟），而更高的频率伴随着更多的随机扰动（所以高频收益率之间的相关性更低），<strong>因此这个描绘从 1 分钟到 1 年频域的新的 H 会比之前那个描绘从 5 分钟到 1 年频域的 H 的取值低一些</strong>。Peters (1994) 在美股上的大量实证完美的证实了这一点。</p>
+
+<h2 id="hurst-指数和-fbm-对投资实践的意义">Hurst 指数和 FBM 对投资实践的意义</h2>
+
+<p>通过前面的介绍，我们已经知道：</p>
+
+<blockquote>
+<p>Hurst 指数刻画的是去除漂移项之后的对数收益率在全频率上的自相关系数。</p>
+</blockquote>
+
+<p>在文章的开篇，我提出国内量化投资界过度夸大了这种自相关性在构建可盈利的投资策略时的作用。这主要体现在以下两个方面：</p>
+
+<ol>
+<li>它从本质上错误的定义了“趋势”；</li>
+<li>它过分夸大了 FBM 增量之间的正相关性在构建投资策略时的作用。</li>
+</ol>
+
+<p>下面我就来分别阐述这两点。</p>
+
+<p>首先来看“错误的定义了趋势”这点。在众多的描述股价的随机过程变种中，标准布朗运动和分数布朗运动都是假设该随机过程是没有长期漂移率项的，即投资品价格经过任意时间跨度 T 的变化之后，其期望价格仍然等于它的初始价格。这显然和现实不符。<strong>因此，更适合描述股价的布朗或分数布朗运动一定是含有代表长期趋势的漂移率项的</strong>。</p>
+
+<p>美股的标普 500 指数或者道琼斯工业指数在百年历程中呈现稳健上行的慢牛行情（除几次严重股灾外），是因为它们的收益率有一个正的（虽然很小）的漂移率；我国 A 股在 2007 年和 2015 年的两波牛市盛宴中之所以能一路上行，是因为收益率有正的且相对于波动率来说很大的漂移率。<strong>收益率中的正漂移率才是趋势，才是能够被策略利用来赚钱的</strong>。</p>
+
+<p>下图是利用时间序列中刻画短期自相关性的 ARMA 模型（参考量信的文章《写给你的金融时间序列：应用篇》）分析上证指数收益率时，得到的漂移率随时间的变化。可见在 2015 年上半年大牛市的时候漂移率显著大于 0；在 2015 年下半年大熊市的时候，漂移率显著小于 0。在这个显著的漂移率面前，刻画自相关性的 ARMA 系数对收益率的影响微乎其微。虽然这是一个从短期自相关性角度考察的例子，但它的结论对于 Hurst 指数这种全频率的长期自相关性同样适用：<strong>在真正代表趋势的漂移率面前，无论短期还是长期的自相关性对于收益率的影响微乎其微</strong>。</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURVYWd4RzI3dENWVmF6UjY5RDFWWjhPLXcweklBQkllbWptUXd1ZzctYmZNREFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NjI2Nn0/dc50bec40268686a76/photo.jpg" alt="" /></p>
+
+<p>再来看一个假想的例子。假设我们有一组对数收益率序列 {3%, 2%, 3%, 2%, 3%, 2%, 3%, 2%, 3%, 2% …}。从赚钱的角度来说，这个序列有明显的趋势（漂移率等于 2.5%），因此应该一直持有该投资品。但如果我们对该收益率序列去掉长期均值并计算其 Hurst 指数，得到的 Hurst 指数没有任何意义（因为这个例子中收益率序列呈周期性变化，因此 Hurst 指数覆盖的频域也是有周期性的，考虑不同频率，Hurst 指数时正时负）。<strong>如果我们不考虑漂移率，那么我们会根据 Hurst 指数认为当收益率序列在特定的频率下有负相关，从而放弃收益率为 2% 的那些时间段，这显然是错误的</strong>。</p>
+
+<p><strong>所以，真正能赚钱的行情是收益率序列中有正的漂移率项。而这压根就不是 Hurst 指数刻画的对象（它研究的是去漂移率项之后，收益率序列的自相关性）。券商报告中使用 Hurst 指数择时出 A 股的牛熊市（漂移率为正和漂移率为负的周期），实在是贻笑大方</strong>。</p>
+
+<p>再来看看第二点，即“夸大了（去漂移率后）收益率之间正相关性的作用”。FBM 的增量之间有相关性，那么当使用 FBM 描述股票对数价格的时候，这里隐含的意思就是如果股票价格在前期涨了且 Hurst 指数大于 0.5，则股票价格在后期也会涨。这个通俗的理解虽然和 FBM 的性质不矛盾，但是细想起来，直接使用它构建策略就有问题了。</p>
+
+<p>假设收益率没有漂移率，让我们就考虑它的自相关性。那么我们关心的是 FBM 过程的增量在已知过去历史的条件下的条件期望。如果条件期望为正，那么可以说收益率的期望为正（当然，对于实际的收益率取值，还受到随机扰动的影响）。<strong>但是，由于 Hurst 指数描绘的是全频率上的相似性，FBM 增量的条件期望在数学上极其复杂（Fink et.al. 2013）</strong>。这在投资中的体现是，一个投资品在上一个交易日的收益率可能是正的，而它在前一周的收益率却是负的。Hurst 指数说明不同频率的收益率在统计上满足同分布，且有相同的相关性。那么这一正一负的不同频率的收益率的实际取值对未来收益率的影响到底是多少呢？<strong>显然，我们不能看了日收益率为正就说下一个交易日的收益率为正；而看了周收益率为负就说下一周的收益率为负。这就是 Hurst 指数作为全频率上的性质在对未来进行推测时带来的复杂之处</strong>。所以，如果我们仅以 Hurst 指数大于 0.5 就说“之前涨了，之后还会涨”，这无疑错误解读了 Hurst 指数的本意。</p>
+
+<p>以上就是对上面两个问题的论证。</p>
+
+<p>那么，Hurst 指数刻画的长记忆性在投资中到底意味着什么呢？我认为它可以从三方面解读：</p>
+
+<p><strong>1. 波动率聚类：</strong></p>
+
+<p>Mandelbrot (1963) 在研究投资品价格时观测到波动率聚类。它的意思是价格的大幅变化往往伴随着大幅变化（变化的符号都有可能），而价格的小幅变化往往伴随着小幅变化。从数学上刻画就意味着收益率的绝对值有很强的长记忆性，它的自相关性衰减的很慢。Taqqu (1975) 的研究也证明了 FBM 的增量（收益率）的绝对值的 Hurst 指数大于 0.5，即有长记忆性。Oh et. al. (2008) 研究了美国、德国、英国等八国主要股指收益率的绝对值并证实，这些时间序列的 Hurst 指数显著高于 0.5。下图为 2001 年到 2017 年上证指数日收益率的标准差，从中可以清晰的看到波动率聚类。</p>
+
+<p><img src="https://botusercontent.telegra.ph/ifttt/file/eyJmIjoiQWdBREJRQURVcWd4RzI3dENWWDNaWFdBTkxXY19VZXYweklBQkVMQm01QUxGRERLTWUwREFBRUMiLCJtIjoiaW1hZ2VcL2pwZWciLCJuIjoicGhvdG8uanBnIiwiZCI6MTUyODk0NjQ2N30/235a78fadf196be8ab/photo.jpg" alt="" /></p>
+
+<blockquote>
+<p>从风险控制的角度出发，使用 Hurst 指数研究收益率的绝对值（即波动率）的自相关性，比使用它来研究收益率的自相关性更具有实际意义。</p>
+</blockquote>
+
+<p><strong>2. 收益率的尖峰肥尾分布</strong></p>
+
+<p>投资品收益率并不满足正态分布，而是呈现出尖峰肥尾的特征。这是市场上的共识。在数学上，这种分布可以使用 Levy 分布描述，而描述该分部时用到两个重要的参数 α（描述尖峰肥尾性）和 β（描述偏度）。（注：这里虽然用到了符号 α 和 β，但它们和我们常说的 α 和 β 收益率无关。）</p>
+
+<p>当一个随机变量的尾部分布满足幂律衰减时，即 prob(X&gt;x) ~ O(x^-α) 且 α &lt; 2，该随机变量的分布体现出肥尾。可以证明，α 和 Hurst 指数 H 有如下关系：<strong>α = 1/H。对于有长记忆性的收益率，因为其 H &gt; 0.5，所以 α = 1/H &lt; 2，因此我们在收益率分布上观测到尖峰肥尾特性</strong>。</p>
+
+<p><strong>3. 对投资者心理的影响</strong></p>
+
+<p>投资品价格的走势都是被无数投资者交易出来的。从一定程度上说，长记忆性是投资者行为在投资品收益率上刻下的烙印。俗话说“一朝被蛇咬十年怕井绳”，那么一次大的股灾显然很容易让投资者变成惊弓之鸟，对大跌的恐惧和风险厌恶显然不是一朝一夕可以忘掉的。这种影响将会是深远的，体现在啊投资者的行为上，便造就了收益率上的长记忆性。</p>
+
+<p>以上便是 Hurst 指数和 FBM 对于投资实践的意义。</p>
+
+<h2 id="结语">结语</h2>
+
+<p>在研究量化投资之初，我从国内的研究报告中接触到了 Hurst 指数（可见它的流行度）。自己尝试后发现效果并不好（尤其样本外）。那时我就在想是自己没用对，还是经过这些研究报告“加工过”的二手资料对 Hurst 指数的理解有误。于是追踪溯源我认真学习了Hurst 指数和 FBM 的原始资料，得出的结论是二手资料对 Hurst 指数的理解有误。终于，今天有机会把我自己对 Hurst 指数和 FBM 的理解写下来，是为了对自己之前学习的总结；是为了让希望真正理解它们的人少走些弯路；是为了抨击那种张嘴就来说“Hurst 指数＞0.5 就有趋势能赚钱”的不负责任的态度。</p>
+
+<p>Hurst 指数的使用和错用关键在于对能赚钱的“趋势”的正确理解。对于什么是“趋势”，很多种方法都能自圆其说，并无所谓谁对谁错。如果我们想利用“趋势”赚钱，那么能赚到钱的定义趋势的方法就是好方法；如果我们是想通过严谨的理论来研究收益率的相关性，那么一个符合收益率特性的数学模型就是好方法。Hurst 指数和 FBM 的提出显然是为了后者。Hurst 指数刻画的是去掉漂移率之后，收益率在频域的自相关性，因此以它来判断市场的价格趋势（收益率中的漂移率项）是不合适的。这相当于我们用目标 a 的模型去搞目标 b，这是行不通的。</p>
+
+<p>影响投资品价格的因素众多。站在研究的角度，我们仅能做合理的简化，并选出一些特征。当我们明确研究的目标后，便可以对这些特征数学建模以便更好的理解。但是，无论怎么建模，描述的都仅仅是很小的一部分特征，是我们研究中针对的那一部分的简单抽象。如果认为这就是市场真理（并错误的解读它），无异于刻舟求剑。</p>
+
+<p><strong>Reference</strong></p>
+
+<p>Feller, W. (1951). The Asymptotic Distribution of the Range of Sums of Independent Random Variables. The Annals of Mathematical Statistics, Vol. 22, 427 – 432.</p>
+
+<p>Hurst, H. E. (1951). Long-term storage capacity of reservoirs. Transactions of the American Society of Civil Engineers, Vol. 116, 770 – 799.</p>
+
+<p>Beran, J. (1994). Statistics for Long-Memory Processes. Chapman &amp; Hall.</p>
+
+<p>Fink, H., Kluppelberg, C., and Zahle, M. (2013). Conditional distributions of processes related to fractional Brownian motion. Journal of Applied Probability, Vol. 50(1), 166 – 183.</p>
+
+<p>Kamenshchikov, S. (2014). Transport Catastrophe Analysis as an Alternative to a Monofractal Description: Theory and Application to Financial Crisis Time Series. Journal of Chaos, Vol. 2014.</p>
+
+<p>Mandelbrot, B. B. (1963). The Variation of Certain Speculative Prices. The Journal of Business, Vol. 36(4), 394 – 419.</p>
+
+<p>Mandelbrot, B. B. and Van Ness, J. W. (1968). Fractional Brownian Motions, Fractional Noises and Applications. SIAM Review, Vol. 10(4), 422 – 437.</p>
+
+<p>Oh, G., Kim, S., and Eom, C. (2008). Long-term memory and volatility clustering in high-frequency price changes. Physica A: Statistical Mechanics and its Applications, Vol. 387(5-6), 1247 – 1254.</p>
+
+<p>Peters E. E. (1994). Fractal Market Analysis: Applying Chaos Theory to Investment and Economics. John Wiley &amp; Sons, Inc.</p>
+
+<p>Taqqu, M. S. (1975). Weak Convergence to Fractional Brownian Motion and to the Rosenblatt Process, Zeitschrift für Wahrscheinlichkeitstheorie und Verwandte Gebiete, Vol. 31, 287 – 302.</p>
+
+<p><img src="http://img.simu800.com/3021364/weixinImage/weixinContent_1508488186773_83.png" alt="" /></p>
+  </section>
+  <footer>
+    
+      <div id="disqus_thread"></div>
+      <script>
+      var disqus_shortname = 'tangs-blog';
+      (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    <nav class="p-pagination c-pagination">
+      <div class="c-pagination__ctrl">
+        <div class="c-pagination__newer">
+          
+          <a href="https://ergatea.github.io/posts/2018%E4%B8%AD%E6%9C%9F%E4%BA%BA%E6%B0%91%E9%93%B6%E8%A1%8C%E8%B4%A7%E5%B8%81%E6%94%BF%E7%AD%96%E5%9B%9E%E9%A1%BE%E4%B8%8E%E5%B1%95%E6%9C%9B/">Newer</a>
+          
+        </div>
+        <div class="c-pagination__older">
+          
+          <a href="https://ergatea.github.io/posts/wolfgang-streeck-democratie-en-kapitalisme-zijn-continu-in-conflict/">Older</a>
+          
+        </div>
+      </div>
+    </nav>
+    
+
+
+    
+<aside class="p-author">
+  
+  <div class="c-avatar p-author__avatar">
+    <img alt="Author Avatar" src="/avatar.jpg" />
+  </div>
+  
+  
+  <div class="p-author__body">
+    
+    <p class="c-title p-author__name ">Xiaoping Tang</p>
+    
+    
+    <p>农民</p>
+    
+    
+    <p>
+      <a href="mailto:xiaoping.tang@gmail.com">
+        Contact me
+      </a>
+    </p>
+    
+  </div>
+  
+</aside>
+
+
+  </footer>
+</article>
+  </main>
+  
+<nav class="l-nav p-menu">
+  <ul class="p-menu__lists">
+    
+      
+      <li class="p-menu__listitem">
+        <a href="/">Blog</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="/about">About</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="/categories">Categories</a>
+      </li>
+      
+    
+      
+      <li class="p-menu__listitem">
+        <a href="/tags">Tags</a>
+      </li>
+      
+    
+  </ul>
+</nav>
+
+
+  <footer class="l-footer">
+    
+<ul class="c-links">
+  
+  <li class="c-links__item">
+    <a href="https://twitter.com/ergatea" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>twitter</title>
+        <use xlink:href="#icon-twitter"></use>
+      </svg>
+    </a>
+  </li>
+  
+  
+  <li class="c-links__item">
+    <a href="https://facebook.com/xiaoping.tang" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>facebook</title>
+        <use xlink:href="#icon-facebook"></use>
+      </svg>
+    </a>
+  </li>
+  
+  
+  
+  
+  <li class="c-links__item">
+    <a href="https://github.com/ergatea" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>github</title>
+        <use xlink:href="#icon-github"></use>
+      </svg>
+    </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+
+
+    <p class="p-copyright">
+      
+        &copy; Copyright Xiaoping Tang
+      
+    </p>
+  </footer>
+
+  
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', '120175421', 'auto');
+      ga('send', 'pageview');
+    </script>
+    
+  
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
