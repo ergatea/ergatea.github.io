@@ -21,34 +21,5 @@
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>股息貼現模型</title>
-      <link>https://ergatea.github.io/posts/%E8%82%A1%E6%81%AF%E8%B2%BC%E7%8F%BE%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Thu, 24 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ergatea.github.io/posts/%E8%82%A1%E6%81%AF%E8%B2%BC%E7%8F%BE%E6%A8%A1%E5%9E%8B/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;股息貼現模型&lt;/strong&gt;（英文：&lt;strong&gt;Dividend Discount Model&lt;/strong&gt;，縮寫：&lt;strong&gt;DDM&lt;/strong&gt;），是现金流折现模型的一种特殊形式，仅用于为有限公司|公司的股权资产定价。其用於以投資者角度估算公司股票價格的合理值，原理就是把預期將來派發的一系列股息按利率貼現成現值，一系列股息的淨現值的總和相加即為該股票的&lt;strong&gt;合理價值&lt;/strong&gt;。這條方程又可稱爲&lt;strong&gt;戈登增長模型&lt;/strong&gt;。以學者邁倫·J.戈登命名，因爲學術界傳統認爲戈登在1959年首先提出這模型，但實際上其理論基礎可追溯至1938年由經濟學家約翰·伯爾·威廉姆斯發表的文章《投資價值理論》。
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>资产估值</title>
-      <link>https://ergatea.github.io/posts/%E8%B5%84%E4%BA%A7%E4%BC%B0%E5%80%BC/</link>
-      <pubDate>Thu, 24 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ergatea.github.io/posts/%E8%B5%84%E4%BA%A7%E4%BC%B0%E5%80%BC/</guid>
-      <description>&lt;p&gt;资产估值(Asset Valuation )是指评估一项投资组合、一家企业、一项投资或资产负债表项目价值的过程。
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>股票流动性溢价理论</title>
-      <link>https://ergatea.github.io/posts/%E8%82%A1%E7%A5%A8%E6%B5%81%E5%8A%A8%E6%80%A7%E6%BA%A2%E4%BB%B7%E7%90%86%E8%AE%BA/</link>
-      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://ergatea.github.io/posts/%E8%82%A1%E7%A5%A8%E6%B5%81%E5%8A%A8%E6%80%A7%E6%BA%A2%E4%BB%B7%E7%90%86%E8%AE%BA/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>
